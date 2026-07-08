@@ -560,12 +560,16 @@ section,
   height: 100%;
   object-fit: cover;
   z-index: 1;
-  /* 在现有的 .hero img 样式下方添加以下代码 */
+
+  /* 仅在手机等移动端设备（屏幕宽度小于 768px）下生效 */
 @media (max-width: 768px) {
   .hero img {
-    object-position: right; /* 仅在屏幕宽度小于 768px 的设备上靠右对齐 */
+    /* 在这里替换成你专门为手机端准备的图片路径或网络链接 */
+    content: url("img/hero-mobile-bg.jpg"); 
+    
+    /* 如果手机端的图想居中显示，可以用 center；如果想靠右，可以用 right */
+    object-position: center; 
   }
-}
 }
 
 .hero:before {
