@@ -550,6 +550,10 @@ section,
   display: flex;
   align-items: center;
   justify-content: center;
+  /* 预留：给手机端准备的背景图属性配置 */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .hero img {
@@ -560,16 +564,6 @@ section,
   height: 100%;
   object-fit: cover;
   z-index: 1;
-
-  /* 仅在手机等移动端设备（屏幕宽度小于 768px）下生效 */
-@media (max-width: 768px) {
-  .hero img {
-    /* 在这里替换成你专门为手机端准备的图片路径或网络链接 */
-    content: url("img/hero-mobile-bg.jpg"); 
-    
-    /* 如果手机端的图想居中显示，可以用 center；如果想靠右，可以用 right */
-    object-position: center; 
-  }
 }
 
 .hero:before {
@@ -577,12 +571,12 @@ section,
   background: color-mix(in srgb, var(--background-color), transparent 70%);
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 2; /* 遮罩层在背景图之上 */
 }
 
 .hero .container {
   position: relative;
-  z-index: 3;
+  z-index: 3; /* 文字必须在最顶层 */
 }
 
 .hero h2 {
@@ -618,6 +612,7 @@ section,
   color: var(--accent-color);
 }
 
+/* 📱 专门处理手机端和移动端的响应式样式 */
 @media (max-width: 768px) {
   .hero h2 {
     font-size: 32px;
@@ -626,8 +621,17 @@ section,
   .hero p {
     font-size: 20px;
   }
-}
 
+  /* 核心修复：手机端隐藏电脑端网页标签图，改用纯 CSS 背景墙 */
+  .hero img {
+    display: none !important; 
+  }
+
+  .hero {
+    /* 在这里替换成你专门为手机端准备的图片路径 */
+    background-image: url("img/hero-mobile-bg.jpg"); 
+  }
+}
 /*--------------------------------------------------------------
 # About Section
 --------------------------------------------------------------*/
