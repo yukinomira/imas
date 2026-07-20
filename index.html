@@ -111,7 +111,7 @@
               <div class="col-lg-6">
                 <ul>
                   <li><i class="bi bi-chevron-right"></i> <strong>シャニソンID:</strong> <span></span>BLNBE2VLE</li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>担当アイドル:</strong> <span>浅倉　透 秦谷 美鈴　上水流 宇宙</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>担当アイドル:</strong> <span>浅倉　透 /秦谷 美鈴/上水流 宇宙/...</span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>语言:</strong> <span></span>中文/English/日本語</li>
                   <li><i class="bi bi-chevron-right"></i> <strong>主要活动地区:</strong> <span></span>香港/深圳</li>
                 </ul>
@@ -269,14 +269,37 @@
   <!-- Main JS File -->
   <script src="js/main.js"></script>
 
-<div id="music-player">
-  <iframe
-    src="https://www.youtube.com/embed/og2jx9bdtIY?autoplay=1"
-    title="Music Player"
-    allow="autoplay"
-    allowfullscreen>
-  </iframe>
-</div>
+<!-- 纯隐形的背景音乐标签 -->
+<audio id="bg-music" loop style="display: none;">
+  <source src="audio/bgm.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 自动播放监听脚本 -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const music = document.getElementById('bg-music');
+
+    // 处理用户首次点击触发播放
+    function startAudioOnFirstClick() {
+      if (music.paused) {
+        music.play().then(() => {
+          // 播放成功后，移除全局点击监听，避免重复触发
+          document.removeEventListener('click', startAudioOnFirstClick);
+          document.removeEventListener('keydown', startAudioOnFirstClick);
+          document.removeEventListener('touchstart', startAudioOnFirstClick);
+        }).catch(err => {
+          console.log("播放失败或被拦截:", err);
+        });
+      }
+    }
+
+    // 监听用户的第一次点击、按键或触屏操作
+    document.addEventListener('click', startAudioOnFirstClick);
+    document.addEventListener('keydown', startAudioOnFirstClick);
+    document.addEventListener('touchstart', startAudioOnFirstClick);
+  });
+</script>
+
   
 </body>
 
